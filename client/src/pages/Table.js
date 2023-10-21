@@ -6,9 +6,7 @@ import Button from "react-bootstrap/Button";
 const ListOfSelectedState = ({ data }) => {
   const [details, setDetails] = useState(undefined);
 
-  useEffect(() => {
-    console.log(data, "DATA");
-  }, [data]);
+  useEffect(() => {}, [data]);
 
   const displayDetails = (details) => {
     setDetails(details);

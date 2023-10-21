@@ -18,7 +18,6 @@ const DashboardProvider1 = ({ children }) => {
   const getElevatorList = async () => {
     const bS = new backendService();
     const response = await bS.getElevatorList();
-    console.log(response, "R");
     if (response) {
       setElevators(response);
       const operationalList = response.filter(
@@ -32,7 +31,7 @@ const DashboardProvider1 = ({ children }) => {
       const outOfOrderList = response.filter(
         (res) => res.state === State.OUT_OF_ORDER
       );
-      setoutOfOrderList(outOfOrderList.length);
+      setoutOfOrderList(outOfOrderList);
     }
   };
 
@@ -40,9 +39,7 @@ const DashboardProvider1 = ({ children }) => {
     getElevatorList();
   }, []);
 
-  useEffect(() => {
-    console.log(elevators, "EE");
-  }, [elevators]);
+  useEffect(() => {}, [elevators]);
 
   return (
     <DashboardContext1.Provider

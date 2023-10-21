@@ -1,37 +1,21 @@
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
 import Badge from "react-bootstrap/Badge";
 import Stack from "react-bootstrap/Stack";
 
 import { useEffect, useState, useContext } from "react";
-// import { backendService } from "../services/backendService";
-// import { backendService } from "./../services/BackendService";
-import {
-  // DashboardProvider1,
-  DashboardContext1,
-} from "../context/DashboardProvider";
+import { DashboardContext1 } from "../context/DashboardProvider";
 import ListOfSelectedState from "./Table";
 import { State } from "../enum";
-// import  from "./../context/DashboardProvider";
 
 const Home = () => {
-  // const [operationCount, setElevatorList] = useState(undefined);
-  // const { elevatorsList } = useContext(DashboardContext1);
-  const { elevatorsList, warningList, outOfOrderList, operationalList } =
+  const { warningList, outOfOrderList, operationalList } =
     useContext(DashboardContext1);
 
   const [data, setData] = useState(undefined);
 
-  // const getData = async () => {
-  //   const BS = new backendService();
-  //   const response = await BS.getElevatorList();
-  //   if (response) setElevatorList(response);
-  // };
-  useEffect(() => {
-    // getData();
-  }, [warningList, outOfOrderList, operationalList]);
+  useEffect(() => {}, [warningList, outOfOrderList, operationalList]);
 
   const setSelectedData = (type) => {
     if (type === State.OPERATIONAL) setData(operationalList);
@@ -40,12 +24,10 @@ const Home = () => {
   };
 
   return (
-    // <DashboardProvider1>
     <>
       <Row paddingTop={20}>
         <Col md={3} lg={3}></Col>
         <Col>
-          {/* <Card className="text-center"> */}
           <Row>
             <Col>
               <Stack direction="horizontal" gap={2}>
@@ -92,17 +74,7 @@ const Home = () => {
                 </Button>
               </Stack>
             </Col>
-            {/* <Button onClick={() => setSelectedData(State.WARNING)}>
-                  Warning {warningList?.length}
-                </Button>
-              </Col>
-              <Col>
-                <Button onClick={() => setSelectedData(State.OUT_OF_ORDER)}>
-                  Out of order {outOfOrderList?.length}
-                </Button>
-              </Col> */}
           </Row>
-          {/* </Card> */}
         </Col>
         <Col md={3} lg={3}></Col>
       </Row>
@@ -115,7 +87,6 @@ const Home = () => {
         <Col md={3} lg={3}></Col>
       </Row>
     </>
-    // </DashboardProvider1>
   );
 };
 
