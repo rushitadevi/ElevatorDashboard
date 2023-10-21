@@ -1,15 +1,17 @@
 const express = require("express");
 const ElevatorSchema = require("../models/elevator");
-const elevatorRouter = express.Router();
+const router = express.Router();
 
-elevatorRouter.get("/list-elevators", async (req, res) => {
+router.get("/list", async (req, res) => {
   try {
     const elevators = await ElevatorSchema.find({});
-    res.send(elevators);
+    res.setHeader("Content-Type", "application/json");
+    console.log(elevators, "elevators");
+    res.status(200).json(elevators);
   } catch (exx) {
     res.statusCode = 500;
     res.send(exx);
   }
 });
 
-module.exports = elevatorRouter;
+module.exports = router;
