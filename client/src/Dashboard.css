@@ -1,0 +1,8 @@
+.info-item {
+    margin-bottom: 10px; /* Adjust spacing as needed */
+  }
+  
+  .info-item span {
+    font-weight: bold; /* Style the labels */
+  }
+  

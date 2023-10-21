@@ -6,7 +6,6 @@ router.get("/list", async (req, res) => {
   try {
     const elevators = await ElevatorSchema.find({});
     res.setHeader("Content-Type", "application/json");
-    console.log(elevators, "elevators");
     res.status(200).json(elevators);
   } catch (exx) {
     res.statusCode = 500;
