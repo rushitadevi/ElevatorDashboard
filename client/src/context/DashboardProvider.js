@@ -7,6 +7,8 @@ const DashboardContext1 = createContext({
   operationalList: undefined,
   warningList: undefined,
   outOfOrderList: undefined,
+  setAccessToken: (token) => {},
+  setLoggedInUser: (user) => {},
 });
 
 const DashboardProvider1 = ({ children }) => {
@@ -14,6 +16,8 @@ const DashboardProvider1 = ({ children }) => {
   const [operationalList, setOperationalList] = useState(undefined);
   const [warningList, setWarningList] = useState(undefined);
   const [outOfOrderList, setoutOfOrderList] = useState(undefined);
+  const [accessToken, setAccessToken] = useState(undefined);
+  const [loggedInUser, setLoggedInUser] = useState(undefined);
 
   const getElevatorList = async () => {
     const bS = new backendService();
@@ -48,6 +52,8 @@ const DashboardProvider1 = ({ children }) => {
         warningList,
         outOfOrderList,
         operationalList,
+        setAccessToken,
+        setLoggedInUser,
       }}
     >
       {children}

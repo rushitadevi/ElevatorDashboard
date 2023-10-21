@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Table from "react-bootstrap/Table";
 import Details from "./Details";
 import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";

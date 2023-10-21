@@ -1,8 +1,14 @@
 .info-item {
-    margin-bottom: 10px; /* Adjust spacing as needed */
+    margin-bottom: 10px; 
   }
   
   .info-item span {
-    font-weight: bold; /* Style the labels */
+    font-weight: bold; 
   }
+
+  .user-name{
+    font-weight: bolder;
+    margin-top: 20px;
+   }
+
   

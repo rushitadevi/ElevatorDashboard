@@ -5,13 +5,26 @@ import Home from "./pages/Home";
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { DashboardProvider1 } from "./context/DashboardProvider";
+import LoginButton from "./pages/Login";
+import AuthProvider from "./config/auth";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <DashboardProvider1>
-      <Home />
-    </DashboardProvider1>
+    <AuthProvider>
+      <DashboardProvider1>
+        {/* <Home /> */}
+        <Router>
+          <Routes>
+            <Route path="/" exact element={<LoginButton />} />
+            <Route path="/logged-in" exact element={<Home />} />
+
+            {/* <Route component={NotFound} /> */}
+          </Routes>
+        </Router>
+      </DashboardProvider1>
+    </AuthProvider>
   </React.StrictMode>
 );
 

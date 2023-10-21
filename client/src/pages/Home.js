@@ -6,19 +6,22 @@ import Stack from "react-bootstrap/Stack";
 
 import { useEffect, useState, useContext } from "react";
 import { DashboardContext1 } from "../context/DashboardProvider";
-import ListOfSelectedState from "./Table";
+import ListOfSelectedState from "./List";
 import { State } from "../enum";
 import "../Dashboard.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import LogoutButton from "./Logout";
 
 const Home = () => {
-  const { warningList, outOfOrderList, operationalList } =
-    useContext(DashboardContext1);
+  const {
+    warningList,
+    outOfOrderList,
+    operationalList,
+    setAccessToken,
+    setLoggedInUser,
+  } = useContext(DashboardContext1);
 
-  const arr = [
-    { state: "Operational" },
-    { state: "Warning" },
-    { state: "Out-of-order" },
-  ];
+  const { getAccessTokenSilently, isAuthenticated, user } = useAuth0();
 
   const [data, setData] = useState(undefined);
   const [disabledWarning, setDisabledWarning] = useState(false);
@@ -27,27 +30,48 @@ const Home = () => {
 
   useEffect(() => {}, [warningList, outOfOrderList, operationalList]);
 
+  useEffect(() => {
+    console.log(isAuthenticated, user, "isAuthenticated");
+    // if (isAuthenticated) {
+    getAccessTokenSilently().then((accessToken) => {
+      console.log("Access Token:--", accessToken);
+      setAccessToken(accessToken);
+      setLoggedInUser(user);
+    });
+    // }
+  }, []);
+
+  const setDisabledValue = (operational, outOfOrder, warning) => {
+    setDisabledOperational(operational);
+    setDisabledOutOfOrder(outOfOrder);
+    setDisabledWarning(warning);
+  };
+
   const setSelectedData = (type) => {
     if (type === State.OPERATIONAL) {
       setData(operationalList);
-      setDisabledOperational(true);
-      setDisabledOutOfOrder(false);
-      setDisabledWarning(false);
+      setDisabledValue(true, false, false);
     } else if (type === State.WARNING) {
       setData(warningList);
-      setDisabledWarning(true);
-      setDisabledOutOfOrder(false);
-      setDisabledOperational(false);
+      setDisabledValue(false, false, true);
     } else if (type === State.OUT_OF_ORDER) {
       setData(outOfOrderList);
-      setDisabledOutOfOrder(true);
-      setDisabledOperational(false);
-      setDisabledWarning(false);
+      setDisabledValue(false, true, false);
     }
   };
 
   return (
     <>
+      <Row>
+        <Col></Col>
+        <Col>
+          {" "}
+          <h4 className="user-name"> Welcome!! {user?.email}</h4>
+        </Col>
+        <Col>
+          <LogoutButton />
+        </Col>
+      </Row>
       <Row
         style={{
           display: "flex",
