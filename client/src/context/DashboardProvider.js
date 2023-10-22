@@ -9,6 +9,7 @@ const DashboardContext1 = createContext({
   outOfOrderList: undefined,
   setAccessToken: (token) => {},
   setLoggedInUser: (user) => {},
+  saveUser: async (user) => {},
 });
 
 const DashboardProvider1 = ({ children }) => {
@@ -39,11 +40,20 @@ const DashboardProvider1 = ({ children }) => {
     }
   };
 
+  const saveUser = async (user) => {
+    const bS = new backendService();
+    await bS.saveUser(loggedInUser);
+  };
+
   useEffect(() => {
     getElevatorList();
   }, []);
 
   useEffect(() => {}, [elevators]);
+
+  useEffect(() => {
+    saveUser(loggedInUser);
+  }, [loggedInUser]);
 
   return (
     <DashboardContext1.Provider

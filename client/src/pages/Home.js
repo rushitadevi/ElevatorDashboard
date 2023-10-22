@@ -31,15 +31,18 @@ const Home = () => {
   useEffect(() => {}, [warningList, outOfOrderList, operationalList]);
 
   useEffect(() => {
-    console.log(isAuthenticated, user, "isAuthenticated");
     // if (isAuthenticated) {
     getAccessTokenSilently().then((accessToken) => {
-      console.log("Access Token:--", accessToken);
       setAccessToken(accessToken);
       setLoggedInUser(user);
     });
+
     // }
   }, []);
+
+  useEffect(() => {
+    setLoggedInUser(user);
+  }, [user]);
 
   const setDisabledValue = (operational, outOfOrder, warning) => {
     setDisabledOperational(operational);
