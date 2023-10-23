@@ -1,4 +1,4 @@
-import React, { useState, useContext, emit, useEffect } from "react";
+import React, { useContext } from "react";
 import { Button, Badge, Stack } from "react-bootstrap";
 import { State } from "../enum";
 import "../Dashboard.css";
@@ -58,14 +58,6 @@ const StackComponent = ({ elevatorState, onDataSend, index }) => {
         </Button>
       </Stack>
     </>
-    //     <Row>
-    //     <Col md={3} lg={3}></Col>
-    //     <Col>
-    //       <ListOfSelectedState data={data} />
-    //     </Col>
-
-    //     <Col md={3} lg={3}></Col>
-    //   </Row>
   );
 };
 

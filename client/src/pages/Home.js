@@ -1,18 +1,15 @@
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Badge from "react-bootstrap/Badge";
-import Stack from "react-bootstrap/Stack";
-import Spinner from "react-bootstrap/Spinner";
+import { Row, Col, Spinner } from "react-bootstrap";
 
 import { useEffect, useState, useContext } from "react";
 import { DashboardContext1 } from "../context/DashboardProvider";
-import ListOfSelectedState from "./List";
+
 import { State } from "../enum";
 import "../Dashboard.css";
+
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./Logout";
 import StackComponent from "../components";
+import ListOfSelectedState from "./List";
 
 const Home = () => {
   const {
@@ -33,6 +30,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!warningList && !outOfOrderList && !operationalList) setLoading(true);
+    setData(operationalList);
   }, [warningList, outOfOrderList, operationalList, loading]);
 
   useEffect(() => {

@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Button, Row, Col } from "react-bootstrap";
 import { DashboardContext1 } from "../context/DashboardProvider";
 
 const LoginButton = () => {
