@@ -7,9 +7,11 @@ const DashboardContext1 = createContext({
   operationalList: undefined,
   warningList: undefined,
   outOfOrderList: undefined,
+  loading: undefined,
   setAccessToken: (token) => {},
   setLoggedInUser: (user) => {},
   saveUser: async (user) => {},
+  setLoading: (loading) => {},
 });
 
 const DashboardProvider1 = ({ children }) => {
@@ -19,12 +21,14 @@ const DashboardProvider1 = ({ children }) => {
   const [outOfOrderList, setoutOfOrderList] = useState(undefined);
   const [accessToken, setAccessToken] = useState(undefined);
   const [loggedInUser, setLoggedInUser] = useState(undefined);
+  const [loading, setLoading] = useState(undefined);
 
   const getElevatorList = async () => {
     const bS = new backendService();
-    const response = await bS.getElevatorList();
+    const response = await bS.getElevatorList(accessToken);
     if (response) {
       setElevators(response);
+
       const operationalList = response.filter(
         (res) => res.state === State.OPERATIONAL
       );
@@ -37,23 +41,25 @@ const DashboardProvider1 = ({ children }) => {
         (res) => res.state === State.OUT_OF_ORDER
       );
       setoutOfOrderList(outOfOrderList);
-    }
+      setLoading(false);
+    } else setLoading(false);
   };
 
-  const saveUser = async (user) => {
+  const saveUser = async () => {
     const bS = new backendService();
-    await bS.saveUser(loggedInUser);
+    await bS.saveUser(loggedInUser, accessToken);
   };
 
   useEffect(() => {
-    getElevatorList();
-  }, []);
+    console.log(loading, "LOADIN");
+  }, [loading]);
 
   useEffect(() => {}, [elevators]);
 
   useEffect(() => {
-    saveUser(loggedInUser);
-  }, [loggedInUser]);
+    if (accessToken) getElevatorList();
+    if (accessToken) saveUser(loggedInUser);
+  }, [loggedInUser, accessToken]);
 
   return (
     <DashboardContext1.Provider
@@ -62,8 +68,10 @@ const DashboardProvider1 = ({ children }) => {
         warningList,
         outOfOrderList,
         operationalList,
+        loading,
         setAccessToken,
         setLoggedInUser,
+        setLoading,
       }}
     >
       {children}

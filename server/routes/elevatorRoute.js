@@ -1,8 +1,9 @@
 const express = require("express");
 const ElevatorSchema = require("../models/elevator");
+const verifyToken = require("../middleware");
 const router = express.Router();
 
-router.get("/list", async (req, res) => {
+router.get("/list", verifyToken, async (req, res) => {
   try {
     const elevators = await ElevatorSchema.find({});
     res.setHeader("Content-Type", "application/json");

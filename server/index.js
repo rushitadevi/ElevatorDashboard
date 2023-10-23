@@ -19,15 +19,8 @@ app.use(
   cors({
     AccessControlAllowOrigin: "*",
     origin: "*",
-    // methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
-
-// app.use(express.json());
-
-// app.get("/api/data", (req, res) => {
-//   res.json({ message: "Hello from the server!" });
-// });
 
 mongoose
   .connect(url, {
@@ -47,5 +40,7 @@ mongoose
   // })
   .catch((err) => console.log(err));
 
-app.use("/elevators", elevatorRouter);
-app.use("/users", userRouter);
+app.use("/api/elevators", elevatorRouter);
+app.use("/api/users", userRouter);
+
+module.exports = app;

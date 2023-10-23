@@ -1,8 +1,9 @@
 const express = require("express");
 const UserSchema = require("../models/User");
+const verifyToken = require("../middleware");
 const router = express.Router();
 
-router.post("/save", async (req, res) => {
+router.post("/save", verifyToken, async (req, res) => {
   try {
     const dataToSave = req.body;
 

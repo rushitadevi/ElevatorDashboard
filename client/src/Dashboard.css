@@ -2,13 +2,19 @@
     margin-bottom: 10px; 
   }
   
-  .info-item span {
+.info-item span {
     font-weight: bold; 
   }
 
-  .user-name{
+.user-name{
     font-weight: bolder;
     margin-top: 20px;
    }
 
-  
+.layout{
+  display: "flex" !important;
+  align-items: "center" !important;
+  justify-content: "center" !important;
+  height: "20vh" !important;
+  text-align: center;
+}  

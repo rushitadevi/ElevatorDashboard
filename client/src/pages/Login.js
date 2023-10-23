@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { DashboardContext1 } from "../context/DashboardProvider";
 
 const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
+  const { setLoading } = useContext(DashboardContext1);
 
   const handleLogin = async () => {
+    setLoading(true);
     await loginWithRedirect();
   };
 
