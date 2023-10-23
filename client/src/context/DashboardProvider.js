@@ -50,9 +50,7 @@ const DashboardProvider1 = ({ children }) => {
     await bS.saveUser(loggedInUser, accessToken);
   };
 
-  useEffect(() => {
-    console.log(loading, "LOADIN");
-  }, [loading]);
+  useEffect(() => {}, [loading]);
 
   useEffect(() => {}, [elevators]);
 

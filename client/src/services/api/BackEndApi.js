@@ -19,7 +19,6 @@ export class BackEndApi {
   }
 
   async saveUser(userData, accessToken) {
-    console.log(userData, "USER");
     const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/users/save`, {
       headers: {
         Accept: "application/json",

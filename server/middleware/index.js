@@ -8,7 +8,6 @@ const verifyToken = (req, res, next) => {
   const tokenWithHeader = req.header("Authorization");
 
   if (process.env.NODE_ENV === "development") {
-    console.log("deve");
     if (!tokenWithHeader) {
       return res
         .status(401)

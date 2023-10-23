@@ -9,7 +9,6 @@ export class backendService {
 
   async saveUser(userData, accessToken) {
     const bApi = new BackEndApi();
-    console.log(userData, "UD");
     const response = await bApi.saveUser(userData, accessToken);
     return response;
   }
