@@ -8,6 +8,7 @@ const LogoutButton = () => {
   return (
     <Button
       size="sm"
+      variant="outline-danger"
       style={{ marginTop: "23px" }}
       onClick={() => logout({ returnTo: window.location.origin })}
     >

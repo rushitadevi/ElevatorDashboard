@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button, Row, Col } from "react-bootstrap";
+import { Button, Row, Col, Card, Container } from "react-bootstrap";
 import { DashboardContext1 } from "../context/DashboardProvider";
 
 const LoginButton = () => {
@@ -13,19 +13,24 @@ const LoginButton = () => {
   };
 
   return (
-    <Row style={{ marginTop: "350px" }}>
-      <Col></Col>
-      <Col>
-        <div className="d-grid gap-2">
-          {" "}
-          <Button onClick={handleLogin} size="lg">
-            Log In
-          </Button>
-        </div>
-      </Col>
-
-      <Col></Col>
-    </Row>
+    <Container className="mt-3 d-flex align-items-center">
+      <Row className="justify-content-md-center" style={{ marginTop: "140px" }}>
+        <Col></Col>
+        <Col>
+          <Card border="dark" className="text-center">
+            <Card.Img variant="top" src="digital-spine.jpeg" />
+            <Card.Body>
+              <Card.Title>Welcome!</Card.Title>
+              <Card.Text>Please login to check dashboard</Card.Text>
+              <Button variant="outline-danger" onClick={handleLogin}>
+                Login
+              </Button>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col></Col>
+      </Row>
+    </Container>
   );
 };
 

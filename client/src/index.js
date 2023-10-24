@@ -14,13 +14,10 @@ root.render(
   <React.StrictMode>
     <AuthProvider>
       <DashboardProvider1>
-        {/* <Home /> */}
         <Router>
           <Routes>
             <Route path="/" exact element={<LoginButton />} />
             <Route path="/logged-in" exact element={<Home />} />
-
-            {/* <Route component={NotFound} /> */}
           </Routes>
         </Router>
       </DashboardProvider1>
