@@ -10,6 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./Logout";
 import StackComponent from "../components/Stack";
 import ListOfSelectedState from "./List";
+import LoginButton from "./Login";
 
 const Home = () => {
   const {
@@ -33,6 +34,8 @@ const Home = () => {
     setElevatorsData(operationalList);
   }, [operationalList]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {}, [isAuthenticated]);
+
   useEffect(() => {
     getIdTokenClaims().then((claims) => {
       if (claims && isAuthenticated) {
@@ -55,26 +58,17 @@ const Home = () => {
 
   return (
     <>
-      <Row>
-        <Col></Col>
-        <Col>
-          <h4 className="user-name"> Welcome!! {user?.name}</h4>
-        </Col>
-        <Col>
-          <LogoutButton />
-        </Col>
-      </Row>
-      {loading ? (
-        <Row className="layout">
-          <Col md={3} lg={3}></Col>
-          <Col>
-            <Spinner animation="border" />
-          </Col>
-          <Col md={3} lg={3}></Col>
-        </Row>
-      ) : (
+      {isAuthenticated ? (
         <>
-          {" "}
+          <Row>
+            <Col></Col>
+            <Col>
+              <h4 className="user-name"> Welcome!! {user?.name}</h4>
+            </Col>
+            <Col>
+              <LogoutButton />
+            </Col>
+          </Row>
           <Row
             style={{
               display: "flex",
@@ -110,6 +104,14 @@ const Home = () => {
           </Row>
           <ListOfSelectedState elevatorsData={elevatorsData} />
         </>
+      ) : (
+        <Row className="layout mt-5">
+          <Col md={3} lg={3}></Col>
+          <Col>
+            <Spinner animation="border" />
+          </Col>
+          <Col md={3} lg={3}></Col>
+        </Row>
       )}
     </>
   );

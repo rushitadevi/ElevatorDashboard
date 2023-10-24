@@ -16,7 +16,10 @@ router.post("/save", verifyToken, async (req, res) => {
     }
   } catch (exx) {
     res.statusCode = 500;
-    res.send(exx);
+    res.send({
+      message: "Somethin went wrong!, please try again in sometime.",
+      exx,
+    });
   }
 });
 
