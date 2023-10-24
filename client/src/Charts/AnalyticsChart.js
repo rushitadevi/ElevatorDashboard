@@ -1,14 +1,6 @@
 import React, { useEffect } from "react";
 import { Bar } from "react-chartjs-2";
 import {
-  //   Chart as ChartJS,
-  //   CategoryScale,
-  //   LinearScale,
-  //   PointElement,
-  //   LineElement,
-  //   Title,
-  //   Tooltip,
-  //   Legend,
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
@@ -19,13 +11,6 @@ import {
 } from "chart.js";
 
 ChartJS.register(
-  //   CategoryScale,
-  //   LinearScale,
-  //   PointElement,
-  //   LineElement,
-  //   Title,
-  //   Tooltip,
-  //   Legend
   CategoryScale,
   LinearScale,
   BarElement,
@@ -35,12 +20,10 @@ ChartJS.register(
 );
 
 const AnalyticsChart = ({ chartArray }) => {
-  useEffect(() => {
-    console.log(chartArray, "chart");
-  }, [chartArray]);
+  useEffect(() => {}, [chartArray]);
 
   const chartData = {
-    labels: chartArray?.data.map((entry) =>
+    labels: chartArray?.data.map((entry, index) =>
       new Date(entry.time).toLocaleDateString()
     ),
     datasets: [
@@ -100,12 +83,7 @@ const AnalyticsChart = ({ chartArray }) => {
     },
   };
 
-  return (
-    <div>
-      {/* <h4>{chartArray?.name}</h4> */}
-      <Bar data={chartData} style={{ width: "700px" }} options={options} />
-    </div>
-  );
+  return <Bar data={chartData} height={"70x"} options={options} />;
 };
 
 export default AnalyticsChart;

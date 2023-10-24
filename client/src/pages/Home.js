@@ -8,7 +8,7 @@ import "../Dashboard.css";
 
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./Logout";
-import StackComponent from "../components";
+import StackComponent from "../components/Stack";
 import ListOfSelectedState from "./List";
 
 const Home = () => {
@@ -24,14 +24,14 @@ const Home = () => {
 
   const { isAuthenticated, user, getIdTokenClaims } = useAuth0();
 
-  const [data, setData] = useState(undefined);
+  const [elevatorsData, setElevatorsData] = useState(undefined);
 
   const stateArray = [State.OPERATIONAL, State.WARNING, State.OUT_OF_ORDER];
 
   useEffect(() => {
     if (!warningList && !outOfOrderList && !operationalList) setLoading(true);
-    setData(operationalList);
-  }, [warningList, outOfOrderList, operationalList, loading]);
+    setElevatorsData(operationalList);
+  }, [operationalList]);
 
   useEffect(() => {
     getIdTokenClaims().then((claims) => {
@@ -48,18 +48,17 @@ const Home = () => {
   }, [user]);
 
   const handleDataFromChild = (dataFromChild) => {
-    setData(dataFromChild);
+    setElevatorsData(dataFromChild);
   };
 
-  useEffect(() => {}, [data]);
+  useEffect(() => {}, [elevatorsData]);
 
   return (
     <>
       <Row>
         <Col></Col>
         <Col>
-          {" "}
-          <h4 className="user-name"> Welcome!! {user?.email}</h4>
+          <h4 className="user-name"> Welcome!! {user?.name}</h4>
         </Col>
         <Col>
           <LogoutButton />
@@ -109,7 +108,7 @@ const Home = () => {
             </Col>
             <Col md={3} lg={3}></Col>
           </Row>
-          <ListOfSelectedState data={data} />
+          <ListOfSelectedState elevatorsData={elevatorsData} />
         </>
       )}
     </>

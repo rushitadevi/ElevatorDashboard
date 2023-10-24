@@ -1,160 +1,116 @@
 import { useEffect, useState } from "react";
 
 import {
-  Accordion,
   Alert,
   Badge,
   Row,
   Col,
-  Card,
   Container,
   Button,
+  Table,
 } from "react-bootstrap";
 import AnalyticsChart from "../Charts/AnalyticsChart";
+import SelectedCard from "../components/SelectedCard";
 
-const ListOfSelectedState = ({ data }) => {
-  useEffect(() => {}, [data]);
+import { State } from "../enum";
+
+const ListOfSelectedState = ({ elevatorsData }) => {
   const [chartData, setChartData] = useState(undefined);
-
-  const displayChart = (d) => {
-    console.log(d.chart.data.length, "d");
-    setChartData(undefined);
-    setChartData(d.chart);
-  };
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [selectedData, setSelectedData] = useState(undefined);
 
   useEffect(() => {
-    console.log(chartData, "CD");
-  }, [chartData]);
+    setChartData(undefined);
+    setSelectedIndex(-1);
+    setSelectedData(undefined);
+  }, [elevatorsData]);
+
+  useEffect(() => {}, [chartData]);
+
+  useEffect(() => {}, [selectedIndex]);
+
+  useEffect(() => {}, [selectedData]);
+
+  const loadChartData = (elevatorData, index) => {
+    setChartData(undefined);
+    setChartData(elevatorData.chart);
+    setSelectedIndex(index);
+    setSelectedData(elevatorData);
+  };
 
   return (
     <>
       <Container>
+        <Row>{selectedData && <SelectedCard data={selectedData} />}</Row>
+        <Row className="mb-3">
+          {chartData ? (
+            <>
+              <Row>
+                <Col>
+                  {chartData && <AnalyticsChart chartArray={chartData} />}
+                </Col>
+              </Row>
+            </>
+          ) : (
+            <Alert variant="warning" align style={{ height: "250px" }}>
+              <Alert.Heading> No data available!</Alert.Heading>
+            </Alert>
+          )}
+        </Row>
         <Row className="justify-content-md-center">
-          <Col xs={12} lg="4">
-            <Accordion>
-              {data ? (
-                data.map((d, index) => {
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Fabrication Number</th>
+                <th>Device number</th>
+                <th>Elevator type</th>
+                <th>State</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {elevatorsData ? (
+                elevatorsData.map((d, index) => {
                   return (
-                    <Accordion.Item eventKey={index}>
-                      <Accordion.Header>
-                        <Container>
-                          <Row>
-                            <Col xs={6}>
-                              <div>
-                                <span style={{ fontWeight: "bold" }}>
-                                  Fabrication Number:{" "}
-                                </span>
-                                <Badge bg="light" text="dark">
-                                  {d.fabricationNumber}
-                                </Badge>
-                              </div>
-                            </Col>
-                            <Col xs={6}>
-                              <div>
-                                <span style={{ fontWeight: "bold" }}>
-                                  Production Year:{" "}
-                                </span>
-                                <Badge bg="light" text="dark">
-                                  {d.productionYear}
-                                </Badge>
-                              </div>
-                            </Col>
-                          </Row>
-                        </Container>
-                      </Accordion.Header>
-                      <Accordion.Body>
-                        <Row>
-                          <Col>
-                            <Card border="dark">
-                              <Card.Body>
-                                <Row>
-                                  <Col>
-                                    <div className="info-item">
-                                      <span>Device Number: </span>
-                                      <Badge bg="light" text="dark">
-                                        {d.deviceIdentificationNumber}
-                                      </Badge>
-                                    </div>
-                                  </Col>
-                                </Row>
-                                <Row>
-                                  <Col>
-                                    <div className="info-item">
-                                      <span>Address: </span>
-                                      <Badge bg="light" text="dark">
-                                        {d.address}
-                                      </Badge>
-                                    </div>
-                                  </Col>
-                                  <Col>
-                                    <div className="info-item">
-                                      <span>Elevator Type: </span>
-                                      <Badge bg="light" text="dark">
-                                        {d.elevatorType}
-                                      </Badge>
-                                    </div>
-                                  </Col>
-                                </Row>
-                                <Row>
-                                  <Col>
-                                    <div className="info-item">
-                                      <span>Manufacturer Name: </span>
-                                      <Badge bg="light" text="dark">
-                                        {d.manufacturerName}
-                                      </Badge>
-                                    </div>
-                                  </Col>
-                                  <Col>
-                                    {" "}
-                                    <div className="info-item">
-                                      <span>State: </span>
-                                      <Badge bg="success" text="light">
-                                        {d.state}
-                                      </Badge>
-                                    </div>
-                                  </Col>
-                                </Row>
-                                <Row>
-                                  {" "}
-                                  <Col>
-                                    <Button
-                                      variant="dark"
-                                      onClick={() => displayChart(d)}
-                                    >
-                                      Load Chart Data
-                                    </Button>
-                                  </Col>
-                                </Row>
-                              </Card.Body>
-                            </Card>
-                          </Col>
-                        </Row>
-                      </Accordion.Body>
-                    </Accordion.Item>
+                    <tr key={index}>
+                      <td>
+                        <Badge bg="light" text="dark">
+                          {d.fabricationNumber}
+                        </Badge>
+                      </td>
+                      <td>{d.deviceIdentificationNumber}</td>
+                      <td>{d.elevatorType}</td>
+                      <td>
+                        <Badge
+                          bg={
+                            d.state === State.OPERATIONAL
+                              ? "success"
+                              : d.state === State.WARNING
+                              ? "danger"
+                              : "warning"
+                          }
+                          text="dark"
+                        >
+                          {d.state}
+                        </Badge>
+                      </td>
+                      <td>
+                        <Button
+                          variant="link"
+                          disabled={selectedIndex === index}
+                          onClick={() => loadChartData(d, index)}
+                        >
+                          Load Data
+                        </Button>
+                      </td>
+                    </tr>
                   );
                 })
               ) : (
                 <Alert variant="danger">There are no records!</Alert>
               )}
-            </Accordion>
-          </Col>
-          <Col lg="8">
-            {chartData ? (
-              <>
-                <Row>
-                  <Col>
-                    {chartData && <AnalyticsChart chartArray={chartData} />}
-                  </Col>
-                </Row>
-              </>
-            ) : (
-              <Alert variant="warning">
-                No data available for this chart! Please try to click load data
-                button.
-              </Alert>
-            )}
-          </Col>
-          {/* <Col md={3} lg={3}></Col> */}
+            </tbody>
+          </Table>
         </Row>
       </Container>
     </>
