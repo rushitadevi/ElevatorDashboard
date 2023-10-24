@@ -1,6 +1,6 @@
 import { Row, Col, Spinner } from "react-bootstrap";
 
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import { DashboardContext1 } from "../context/DashboardProvider";
 
 import { State } from "../enum";
@@ -31,7 +31,7 @@ const Home = () => {
   useEffect(() => {
     if (!warningList && !outOfOrderList && !operationalList) setLoading(true);
     setElevatorsData(operationalList);
-  }, [operationalList]);
+  }, [operationalList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     getIdTokenClaims().then((claims) => {
@@ -41,11 +41,11 @@ const Home = () => {
         setLoggedInUser(user);
       }
     });
-  }, [getIdTokenClaims, isAuthenticated, user]);
+  }, [isAuthenticated, user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setLoggedInUser(user);
-  }, [user]);
+  }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleDataFromChild = (dataFromChild) => {
     setElevatorsData(dataFromChild);
