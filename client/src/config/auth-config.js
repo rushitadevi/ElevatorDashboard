@@ -1,7 +1,6 @@
-// auth0-config.js
-const domain = "dev-zz8kiut2zaratvye.us.auth0.com";
-const clientId = "AoMK1T0YJTegfBmTsg0Enwme2FNe2UxS";
-const redirectUri = "http://localhost:3000/logged-in";
+const domain = process.env.REACT_APP_DOMAIN;
+const clientId = process.env.REACT_APP_CLIENT_ID;
+const redirectUri = process.env.REACT_APP_REDIRECT_URL;
 
 const authConfig = {
   domain,

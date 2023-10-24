@@ -38,6 +38,10 @@ const elevatorCollection = new mongoose.Schema(
       type: String,
       required: false,
     },
+    chart: {
+      type: Object,
+      required: false,
+    },
   },
   {
     timestamps: true,

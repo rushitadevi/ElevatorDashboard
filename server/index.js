@@ -36,7 +36,7 @@ mongoose
   )
   // .then(() => {
   //   // insert data from json into mongodb
-  //   // insertData();
+  //   insertData();
   // })
   .catch((err) => console.log(err));
 
