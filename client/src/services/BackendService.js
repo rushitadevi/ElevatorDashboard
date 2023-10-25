@@ -1,15 +1,13 @@
 import { BackEndApi } from "./../services/api/BackEndApi.js";
 
 export class backendService {
-  async getElevatorList(accessToken) {
-    const bApi = new BackEndApi();
-    const response = await bApi.getElevatorList(accessToken);
+  static async getElevatorList(accessToken) {
+    const response = await BackEndApi.getElevatorList(accessToken);
     return response;
   }
 
-  async saveUser(userData, accessToken) {
-    const bApi = new BackEndApi();
-    const response = await bApi.saveUser(userData, accessToken);
+  static async saveUser(userData, accessToken) {
+    const response = await BackEndApi.saveUser(userData, accessToken);
     return response;
   }
 }

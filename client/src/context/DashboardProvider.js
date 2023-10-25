@@ -24,8 +24,7 @@ const DashboardProvider1 = ({ children }) => {
   const [loading, setLoading] = useState(undefined);
 
   const getElevatorList = async () => {
-    const bS = new backendService();
-    const response = await bS.getElevatorList(accessToken);
+    const response = await backendService.getElevatorList(accessToken);
     if (response) {
       setElevators(response);
 
@@ -46,8 +45,7 @@ const DashboardProvider1 = ({ children }) => {
   };
 
   const saveUser = async () => {
-    const bS = new backendService();
-    await bS.saveUser(loggedInUser, accessToken);
+    await backendService.saveUser(loggedInUser, accessToken);
   };
 
   useEffect(() => {}, [loading]);
@@ -57,6 +55,7 @@ const DashboardProvider1 = ({ children }) => {
   useEffect(() => {
     if (accessToken) getElevatorList();
     if (accessToken) saveUser(loggedInUser);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loggedInUser, accessToken]);
 
   return (

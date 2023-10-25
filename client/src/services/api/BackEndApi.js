@@ -6,7 +6,7 @@ export const Methods = {
 };
 
 export class BackEndApi {
-  async getElevatorList(accessToken) {
+  static async getElevatorList(accessToken) {
     const res = await fetch(
       `${process.env.REACT_APP_SERVER_URL}/elevators/list`,
       {
@@ -18,7 +18,7 @@ export class BackEndApi {
     return await res.json();
   }
 
-  async saveUser(userData, accessToken) {
+  static async saveUser(userData, accessToken) {
     const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/users/save`, {
       headers: {
         Accept: "application/json",
