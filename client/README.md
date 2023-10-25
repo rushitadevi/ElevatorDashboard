@@ -1,70 +1,191 @@
-# Getting Started with Create React App
+# Elevator Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## API Documentation
 
-## Available Scripts
+### Endpoints
 
-In the project directory, you can run:
+#### GET /api/elevators/list
 
-### `npm start`
+- **Description:** Retrieves a list of elevators.
+- **Authentication:** Requires a valid accessToken generated from the frontend and verified by JWT.
+- **Response Codes:**
+  - 200: Returns the list of elevators.
+  - 404: Access token not provided.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### POST /api/users/save
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Description:** Saves a user in the database.
+- **Behavior:** Users who log in to the dashboard are saved in the database.
+- **Authentication:** Requires a valid accessToken generated from the frontend and verified by JWT.
+- **Response Codes:**
+  - 200: "User saved successfully."
+  - 200: "User already exists" if trying to save the same user again.
 
-### `npm test`
+### Authentication
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Description:** Authenticates the user and generates an access token.
+- **Method:** Uses oAuth0 for authentication.
 
-### `npm run build`
+## Frontend Components
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Login Component
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Description:** Used to log in to the dashboard.
+- **Behavior:** Generates an access token upon successful login, which is then sent to the backend.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Home Component
 
-### `npm run eject`
+- **Description:** Used to display elevator data according to the state.
+- **Behavior:**
+  - Clicking on each button displays a list of elevators in that state (e.g., operational, warning, out of order).
+  - Clicking on each record displays detailed analytics.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Dashboard Schema (MongoDB)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Users**
+   - **Columns:** Name, Email, Picture, sub
+2. **Elevators**
+   - **Columns:** Fabrication Number, Address, Floor Number, Device Identification Number, Manufacturer Name, Production Year, Elevator Type, State, Warning Message, Chart
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Setup Instructions
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### API Setup
 
-## Learn More
+1. Install required dependencies (Node.js, Express).
+2. Create API endpoints following the documented routes.
+3. Connect to the database (MongoDB Atlas).
+4. Implement authentication mechanism using JWT.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Frontend Setup
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Set up a development environment with React.js.
+2. Create frontend components according to the documentation.
+3. Implement API calls to connect to the backend.
+4. Implement context in the application.
+5. Divide components into separate subcomponents.
+6. Use a chart library to display analytical charts.
 
-### Code Splitting
+### Database Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. MongoDB Atlas is used to set up the database.
+2. Use the MongoDB URL in the backend.
 
-### Analyzing the Bundle Size
+### oAuth0 Setup
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Set up the development environment by adding the localhost URL.
+2. Download public keys from oAuth0 and use them in the backend to verify access tokens.
 
-### Making a Progressive Web App
+### Test Cases
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. Backend testing using the supertest library.
 
-### Advanced Configuration
+## Default oAuth0 Users
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **User 1:**
+  - Email: neteyah588@wermink.com
+  - Password: temp@1234
+- **User 2:**
+  - Email: ron@gmail.com
+  - Password: temp@1234
 
-### Deployment
+## Getting Started
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+To get started with the repository, clone it from [repository URL].
 
-### `npm run build` fails to minify
+# Elevator Management System
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## API Documentation
+
+### Endpoints
+
+#### GET /api/elevators/list
+
+- **Description:** Retrieves a list of elevators.
+- **Authentication:** Requires a valid accessToken generated from the frontend and verified by JWT.
+- **Response Codes:**
+  - 200: Returns the list of elevators.
+  - 404: Access token not provided.
+
+#### POST /api/users/save
+
+- **Description:** Saves a user in the database.
+- **Behavior:** Users who log in to the dashboard are saved in the database.
+- **Authentication:** Requires a valid accessToken generated from the frontend and verified by JWT.
+- **Response Codes:**
+  - 200: "User saved successfully."
+  - 200: "User already exists" if trying to save the same user again.
+
+### Authentication
+
+- **Description:** Authenticates the user and generates an access token.
+- **Method:** Uses oAuth0 for authentication.
+
+## Frontend Components
+
+### Login Component
+
+- **Description:** Used to log in to the dashboard.
+- **Behavior:** Generates an access token upon successful login, which is then sent to the backend.
+
+### Home Component
+
+- **Description:** Used to display elevator data according to the state.
+- **Behavior:**
+  - Clicking on each button displays a list of elevators in that state (e.g., operational, warning, out of order).
+  - Clicking on each record displays detailed analytics.
+
+### Dashboard Schema (MongoDB)
+
+1. **Users**
+   - **Columns:** Name, Email, Picture, sub
+2. **Elevators**
+   - **Columns:** Fabrication Number, Address, Floor Number, Device Identification Number, Manufacturer Name, Production Year, Elevator Type, State, Warning Message, Chart
+
+## Setup Instructions
+
+### API Setup
+
+1. Install required dependencies (Node.js, Express).
+2. Create API endpoints following the documented routes.
+3. Connect to the database (MongoDB Atlas).
+4. Implement authentication mechanism using JWT.
+
+### Frontend Setup
+
+1. Set up a development environment with React.js.
+2. Create frontend components according to the documentation.
+3. Implement API calls to connect to the backend.
+4. Implement context in the application.
+5. Divide components into separate subcomponents.
+6. Use a chart library to display analytical charts.
+
+### Database Setup
+
+1. MongoDB Atlas is used to set up the database.
+2. Use the MongoDB URL in the backend.
+
+### oAuth0 Setup
+
+1. Set up the development environment by adding the localhost URL.
+2. Download public keys from oAuth0 and use them in the backend to verify access tokens.
+
+### Test Cases
+
+1. Backend testing using the supertest library.
+
+## Two Users to login
+
+- **User 1:**
+  - Email: neteyah588@wermink.com
+  - Password: temp@1234
+- **User 2:**
+  - Email: ron@gmail.com
+  - Password: temp@1234
+
+## Getting Started
+
+To get started with the repository, clone it from [repository URL].
+
+## To run front end project: npm run client
+
+## To run back end project: npm run start

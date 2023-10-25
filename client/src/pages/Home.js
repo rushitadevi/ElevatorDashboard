@@ -1,6 +1,6 @@
 import { Row, Col, Spinner } from "react-bootstrap";
 
-import { useEffect, useState, useContext, useCallback } from "react";
+import { useEffect, useState, useContext } from "react";
 import { DashboardContext1 } from "../context/DashboardProvider";
 
 import { State } from "../enum";
@@ -10,14 +10,12 @@ import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "./Logout";
 import StackComponent from "../components/Stack";
 import ListOfSelectedState from "./List";
-import LoginButton from "./Login";
 
 const Home = () => {
   const {
     warningList,
     outOfOrderList,
     operationalList,
-    loading,
     setAccessToken,
     setLoggedInUser,
     setLoading,

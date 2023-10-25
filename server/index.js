@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const elevatorRouter = require("./routes/elevatorRoute");
 const userRouter = require("./routes/userRoute");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 const cors = require("cors");
 app.use(bodyParser.json());
@@ -21,6 +22,16 @@ app.use(
     origin: "*",
   })
 );
+
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+
+app.get("/api", (req, res) => {
+  res.json({ message: "Hello from server!" });
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+});
 
 mongoose
   .connect(url, {
