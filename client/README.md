@@ -1,5 +1,16 @@
 # Elevator Management System
 
+## Summary
+
+- **Description:** Project is to get all the elevators from database. Initially, sample data is loaded into the database from provided json file. There are two users set in oAuth0 (app). When user loggs in, it asks for credentials(set up is done in oAuth0). Logged in user is saved into the database. Access Token is generated and sent it to back end. Access token is verified by JWT.
+  On the dashboard, there are three buttons according to state(warning, out-of-order, operational). And displayed count of each state. when we click on each button, it will display list of elevators. When we click on item from that list, it will display details of that list and chart if it is available. There is loadData button which is disabled when data is loaded. Just to indicate which record is loaded.
+  If there are no records available, alert message is displayed.
+  Layout is very simple.
+
+  ## Technologies used: React Js, Node Js, Javascript, express.
+
+  ## Database: MongoDb
+
 ## API Documentation
 
 ### Endpoints
@@ -184,8 +195,10 @@ To get started with the repository, clone it from [repository URL].
 
 ## Getting Started
 
-To get started with the repository, clone it from [repository URL].
+To get started with the repository, clone it from https://github.com/rushitadevi/ElevatorDashboard.git.
 
 ## To run front end project: npm run client
 
 ## To run back end project: npm run start
+
+## To run back end test: npm run test-backend
